@@ -51,8 +51,6 @@
             // 
             // btnKey7
             // 
-            this.btnKey7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnKey7.Location = new System.Drawing.Point(12, 78);
             this.btnKey7.Name = "btnKey7";
             this.btnKey7.Size = new System.Drawing.Size(50, 50);
@@ -63,8 +61,6 @@
             // 
             // btnKey4
             // 
-            this.btnKey4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnKey4.Location = new System.Drawing.Point(12, 145);
             this.btnKey4.Name = "btnKey4";
             this.btnKey4.Size = new System.Drawing.Size(50, 50);
@@ -75,8 +71,6 @@
             // 
             // btnKey1
             // 
-            this.btnKey1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnKey1.Location = new System.Drawing.Point(12, 212);
             this.btnKey1.Name = "btnKey1";
             this.btnKey1.Size = new System.Drawing.Size(50, 50);
@@ -87,8 +81,6 @@
             // 
             // btnKeySign
             // 
-            this.btnKeySign.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnKeySign.Location = new System.Drawing.Point(12, 279);
             this.btnKeySign.Name = "btnKeySign";
             this.btnKeySign.Size = new System.Drawing.Size(40, 40);
@@ -175,6 +167,7 @@
             this.btnKeyComma.TabIndex = 3;
             this.btnKeyComma.Text = ",";
             this.btnKeyComma.UseVisualStyleBackColor = true;
+            this.btnKeyComma.Visible = false;
             this.btnKeyComma.Click += new System.EventHandler(this.btnKeyComma_Click);
             // 
             // btnKeyDivide
@@ -229,6 +222,8 @@
             // 
             // lblInfo
             // 
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInfo.Location = new System.Drawing.Point(12, 9);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(294, 13);
@@ -238,7 +233,8 @@
             // 
             // txtBoxResult
             // 
-            this.txtBoxResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBoxResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBoxResult.Font = new System.Drawing.Font("Square721 BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxResult.Location = new System.Drawing.Point(12, 35);
             this.txtBoxResult.Name = "txtBoxResult";
@@ -275,7 +271,7 @@
             this.Controls.Add(this.btnKey0);
             this.MaximizeBox = false;
             this.Name = "KalkulatorMain";
-            this.Text = "Kalkulator";
+            this.Text = "Kalkulator całkowitoliczbowy";
             this.ResumeLayout(false);
             this.PerformLayout();
 
