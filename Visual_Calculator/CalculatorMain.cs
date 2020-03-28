@@ -134,5 +134,6 @@ namespace Visual_Calculator
         {
             doOperation(op.RESULT);
         }
+
     }
 }
