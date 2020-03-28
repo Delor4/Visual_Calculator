@@ -12,11 +12,13 @@ namespace Visual_Calculator
 {
     public partial class KalkulatorMain : Form
     {
-        Double lastResult = .0;
+        long lastResult = 0;
+        long result = 0;
+
+        enum op { NONE, RESULT, MULTIPLY, DIVIDE, SUBSTRACT, ADD };
         
-        enum op { RESULT, MULTIPLY, DIVIDE, SUBSTRACT, ADD };
-        
-        op lastOperation = op.RESULT;
+        op lastOperation = op.NONE;
+        bool clearResult = true;
 
         public KalkulatorMain()
         {
@@ -26,108 +28,111 @@ namespace Visual_Calculator
 
         private void validateTxtBox()
         {
-            //removing starting zeros
-            while(txtBoxResult.TextLength > 1 && txtBoxResult.Text.Substring(0, 2) == "00")
-            {
-                txtBoxResult.Text = txtBoxResult.Text.Substring(1);
-            }
-            if(txtBoxResult.TextLength > 1 && txtBoxResult.Text[0] == '0' && txtBoxResult.Text[1] != '.')
-            {
-                txtBoxResult.Text = txtBoxResult.Text.Substring(1);
-            }
-            if(txtBoxResult.TextLength == 0)
-            {
-                txtBoxResult.Text = "0";
-            }
+            txtBoxResult.Text = result.ToString();
         }
-        private void onNumberKey(char key)
+        private void onNumberKey(int nr)
         {
-            txtBoxResult.AppendText(key.ToString());
+            result = clearResult ? nr : result * 10 + (Math.Sign(result) != 0 ? (Math.Sign(result) * nr):nr);
+            clearResult = false;
+            validateTxtBox();
+        }
+        private void doOperation(op o)
+        {
+            if (lastOperation == op.NONE)
+            {
+                lastOperation = o;
+                lastResult = result;
+                clearResult = true;
+            }
+            validateTxtBox();
+        }
+        private void doChangeSign()
+        {
+            result = - result;
             validateTxtBox();
         }
         private void btnKey1_Click(object sender, EventArgs e)
         {
-            onNumberKey('1');
+            onNumberKey(1);
         }
 
         private void btnKey2_Click(object sender, EventArgs e)
         {
-            onNumberKey('2');
+            onNumberKey(2);
         }
 
         private void btnKey3_Click(object sender, EventArgs e)
         {
-            onNumberKey('3');
+            onNumberKey(3);
         }
 
         private void btnKey4_Click(object sender, EventArgs e)
         {
-            onNumberKey('4');
+            onNumberKey(4);
         }
 
         private void btnKey5_Click(object sender, EventArgs e)
         {
-            onNumberKey('5');
+            onNumberKey(5);
         }
 
         private void btnKey6_Click(object sender, EventArgs e)
         {
-            onNumberKey('6');
+            onNumberKey(6);
         }
 
         private void btnKey7_Click(object sender, EventArgs e)
         {
-            onNumberKey('7');
+            onNumberKey(7);
         }
-
         private void btnKey8_Click(object sender, EventArgs e)
         {
-            onNumberKey('8');
+            onNumberKey(8);
         }
 
         private void btnKey9_Click(object sender, EventArgs e)
         {
-            onNumberKey('9');
+            onNumberKey(9);
         }
 
         private void btnKey0_Click(object sender, EventArgs e)
         {
-            onNumberKey('0');
+            onNumberKey(0);
         }
 
         private void btnKeyComma_Click(object sender, EventArgs e)
         {
-            onNumberKey('.');
+            
         }
 
         private void btnKeySign_Click(object sender, EventArgs e)
         {
-
+            doChangeSign();
         }
 
         private void btnKeyDivide_Click(object sender, EventArgs e)
         {
-
+            doOperation(op.DIVIDE);
         }
 
         private void btnKeyMultiply_Click(object sender, EventArgs e)
         {
-
+            doOperation(op.MULTIPLY);
         }
 
         private void btnKeySubstract_Click(object sender, EventArgs e)
         {
-
+            doOperation(op.SUBSTRACT);
         }
 
         private void btnKeyAdd_Click(object sender, EventArgs e)
         {
-
+            doOperation(op.ADD);
         }
 
         private void btnKeyEqual_Click(object sender, EventArgs e)
         {
-
+            doOperation(op.RESULT);
         }
     }
 }
