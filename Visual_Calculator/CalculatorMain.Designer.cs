@@ -269,6 +269,7 @@
             this.Controls.Add(this.btnKey1);
             this.Controls.Add(this.btnKeyEqual);
             this.Controls.Add(this.btnKey0);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "KalkulatorMain";
             this.Text = "Kalkulator całkowitoliczbowy";

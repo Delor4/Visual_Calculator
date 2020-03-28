@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace Visual_Calculator
 {
@@ -26,6 +27,8 @@ namespace Visual_Calculator
             { op.RESULT,'=' },
         };
 
+        Dictionary<Keys, Action<object, EventArgs>> keyBindings;
+
         String history = "";
         bool clearResult = true;
         bool clearHistory = true;
@@ -34,14 +37,64 @@ namespace Visual_Calculator
         {
             InitializeComponent();
             updateTexts();
-        }
+            initBindings();
 
+        }
+        private void initBindings()
+        {
+            keyBindings = new Dictionary<Keys, Action<object, EventArgs>>{
+                { Keys.D1, this.btnKey1_Click },
+                { Keys.D2, this.btnKey2_Click },
+                { Keys.D3, this.btnKey3_Click },
+                { Keys.D4, this.btnKey4_Click },
+                { Keys.D5, this.btnKey5_Click },
+                { Keys.D6, this.btnKey6_Click },
+                { Keys.D7, this.btnKey7_Click },
+                { Keys.D8, this.btnKey8_Click },
+                { Keys.D9, this.btnKey9_Click },
+                { Keys.D0, this.btnKey0_Click },
+                { Keys.Add, this.btnKeyAdd_Click },
+                { Keys.Divide, this.btnKeyDivide_Click },
+                { Keys.Subtract, this.btnKeySubstract_Click },
+                { Keys.Multiply, this.btnKeyMultiply_Click },
+                { Keys.D8 | Keys.Shift, this.btnKeyMultiply_Click },
+                { Keys.Execute, this.btnKeyEqual_Click },
+                { Keys.Return, this.btnKeyEqual_Click },
+                { Keys.OemMinus, this.btnKeySubstract_Click },
+                { Keys.Oemplus | Keys.Shift, this.btnKeyAdd_Click },
+                { Keys.Oemplus, this.btnKeyEqual_Click },
+                { Keys.OemQuestion, this.btnKeyDivide_Click },
+
+                { Keys.NumPad1, this.btnKey1_Click },
+                { Keys.NumPad2, this.btnKey2_Click },
+                { Keys.NumPad3, this.btnKey3_Click },
+                { Keys.NumPad4, this.btnKey4_Click },
+                { Keys.NumPad5, this.btnKey5_Click },
+                { Keys.NumPad6, this.btnKey6_Click },
+                { Keys.NumPad7, this.btnKey7_Click },
+                { Keys.NumPad8, this.btnKey8_Click },
+                { Keys.NumPad9, this.btnKey9_Click },
+                { Keys.NumPad0, this.btnKey0_Click },
+            };
+
+        }
         private void updateTexts()
         {
             txtBoxResult.Text = result.ToString();
             lblInfo.Text = history;
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyBindings.ContainsKey(keyData))
+            {
+                keyBindings[keyData](null, null);
+                return true;
+            }
+            
+            if(keyData != (Keys.Shift | Keys.ShiftKey)) MessageBox.Show("Klawisz "+ keyData.ToString());
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
         private void onNumberKey(int nr)
         {
             result = clearResult ? nr : result * 10 + (Math.Sign(result) != 0 ? (Math.Sign(result) * nr) : nr);
@@ -66,8 +119,8 @@ namespace Visual_Calculator
 
         private void doOperation(op o)
         {
-            if (clearHistory) history = "";    
-            
+            if (clearHistory) history = "";
+
             history += " " + result.ToString() + " " + opChars[o];
 
             clearHistory = o == op.RESULT ? true : false;
