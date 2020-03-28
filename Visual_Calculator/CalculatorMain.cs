@@ -12,44 +12,89 @@ namespace Visual_Calculator
 {
     public partial class KalkulatorMain : Form
     {
+        enum op { NONE, RESULT, MULTIPLY, DIVIDE, SUBSTRACT, ADD };
+
         long lastResult = 0;
         long result = 0;
-
-        enum op { NONE, RESULT, MULTIPLY, DIVIDE, SUBSTRACT, ADD };
-        
         op lastOperation = op.NONE;
+
+        Dictionary<op, char> opChars = new Dictionary<op, char> {
+            { op.ADD,'+' },
+            { op.SUBSTRACT,'-' },
+            { op.MULTIPLY,'*' },
+            { op.DIVIDE,'/' },
+            { op.RESULT,'=' },
+        };
+
+        String history = "";
         bool clearResult = true;
+        bool clearHistory = true;
 
         public KalkulatorMain()
         {
             InitializeComponent();
-            validateTxtBox();
+            updateTexts();
         }
 
-        private void validateTxtBox()
+        private void updateTexts()
         {
             txtBoxResult.Text = result.ToString();
+            lblInfo.Text = history;
         }
+
         private void onNumberKey(int nr)
         {
-            result = clearResult ? nr : result * 10 + (Math.Sign(result) != 0 ? (Math.Sign(result) * nr):nr);
+            result = clearResult ? nr : result * 10 + (Math.Sign(result) != 0 ? (Math.Sign(result) * nr) : nr);
             clearResult = false;
-            validateTxtBox();
+            updateTexts();
         }
+        private long executeOp(op o, long firstOp, long secondOp)
+        {
+            switch (o)
+            {
+                case op.ADD:
+                    return firstOp + secondOp;
+                case op.SUBSTRACT:
+                    return firstOp - secondOp;
+                case op.MULTIPLY:
+                    return firstOp * secondOp;
+                case op.DIVIDE:
+                    return firstOp / secondOp;
+            }
+            return 0;
+        }
+
         private void doOperation(op o)
         {
-            if (lastOperation == op.NONE)
+            if (clearHistory) history = "";    
+            
+            history += " " + result.ToString() + " " + opChars[o];
+
+            clearHistory = o == op.RESULT ? true : false;
+
+            if (lastOperation != op.NONE)
             {
-                lastOperation = o;
-                lastResult = result;
-                clearResult = true;
+                try
+                {
+                    result = lastOperation == op.RESULT ? result : executeOp(lastOperation, lastResult, result);
+                }
+                catch (DivideByZeroException e)
+                {
+                    result = 0;
+                    o = op.NONE;
+                    history += " Błąd!";
+                    clearHistory = true;
+                }
             }
-            validateTxtBox();
+            lastResult = result;
+            clearResult = true;
+            lastOperation = o;
+            updateTexts();
         }
         private void doChangeSign()
         {
-            result = - result;
-            validateTxtBox();
+            result = -result;
+            updateTexts();
         }
         private void btnKey1_Click(object sender, EventArgs e)
         {
@@ -102,7 +147,7 @@ namespace Visual_Calculator
 
         private void btnKeyComma_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnKeySign_Click(object sender, EventArgs e)

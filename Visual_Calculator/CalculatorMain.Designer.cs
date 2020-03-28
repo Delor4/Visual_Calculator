@@ -239,7 +239,6 @@
             // txtBoxResult
             // 
             this.txtBoxResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBoxResult.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtBoxResult.Font = new System.Drawing.Font("Square721 BT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxResult.Location = new System.Drawing.Point(12, 35);
             this.txtBoxResult.Name = "txtBoxResult";
