@@ -1,6 +1,6 @@
 ﻿namespace Visual_Calculator
 {
-    partial class Form1
+    partial class KalkulatorMain
     {
         /// <summary>
         /// Wymagana zmienna projektanta.
@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // KalkulatorMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(257, 295);
+            this.MaximizeBox = false;
+            this.Name = "KalkulatorMain";
+            this.Text = "Kalkulator";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
