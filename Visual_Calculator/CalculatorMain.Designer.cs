@@ -103,6 +103,7 @@
             this.btnKey7.TabIndex = 0;
             this.btnKey7.Text = "7";
             this.btnKey7.UseVisualStyleBackColor = true;
+            this.btnKey7.Click += new System.EventHandler(this.btnKey7_Click);
             // 
             // btnKey4
             // 
@@ -116,6 +117,7 @@
             this.btnKey4.TabIndex = 1;
             this.btnKey4.Text = "4";
             this.btnKey4.UseVisualStyleBackColor = true;
+            this.btnKey4.Click += new System.EventHandler(this.btnKey4_Click);
             // 
             // btnKey1
             // 
@@ -129,6 +131,7 @@
             this.btnKey1.TabIndex = 2;
             this.btnKey1.Text = "1";
             this.btnKey1.UseVisualStyleBackColor = true;
+            this.btnKey1.Click += new System.EventHandler(this.btnKey1_Click);
             // 
             // btnKeySign
             // 
@@ -142,6 +145,7 @@
             this.btnKeySign.TabIndex = 3;
             this.btnKeySign.Text = "+/-";
             this.btnKeySign.UseVisualStyleBackColor = true;
+            this.btnKeySign.Click += new System.EventHandler(this.btnKeySign_Click);
             // 
             // flowLayoutPanel5
             // 
@@ -168,6 +172,7 @@
             this.btnKey8.TabIndex = 0;
             this.btnKey8.Text = "8";
             this.btnKey8.UseVisualStyleBackColor = true;
+            this.btnKey8.Click += new System.EventHandler(this.btnKey8_Click);
             // 
             // btnKey5
             // 
@@ -179,6 +184,7 @@
             this.btnKey5.TabIndex = 1;
             this.btnKey5.Text = "5";
             this.btnKey5.UseVisualStyleBackColor = true;
+            this.btnKey5.Click += new System.EventHandler(this.btnKey5_Click);
             // 
             // btnKey2
             // 
@@ -190,6 +196,7 @@
             this.btnKey2.TabIndex = 2;
             this.btnKey2.Text = "2";
             this.btnKey2.UseVisualStyleBackColor = true;
+            this.btnKey2.Click += new System.EventHandler(this.btnKey2_Click);
             // 
             // btnKey0
             // 
@@ -201,6 +208,7 @@
             this.btnKey0.TabIndex = 3;
             this.btnKey0.Text = "0";
             this.btnKey0.UseVisualStyleBackColor = true;
+            this.btnKey0.Click += new System.EventHandler(this.btnKey0_Click);
             // 
             // flowLayoutPanel6
             // 
@@ -227,6 +235,7 @@
             this.btnKey9.TabIndex = 0;
             this.btnKey9.Text = "9";
             this.btnKey9.UseVisualStyleBackColor = true;
+            this.btnKey9.Click += new System.EventHandler(this.btnKey9_Click);
             // 
             // btnKey6
             // 
@@ -238,6 +247,7 @@
             this.btnKey6.TabIndex = 1;
             this.btnKey6.Text = "6";
             this.btnKey6.UseVisualStyleBackColor = true;
+            this.btnKey6.Click += new System.EventHandler(this.btnKey6_Click);
             // 
             // btnKey3
             // 
@@ -249,6 +259,7 @@
             this.btnKey3.TabIndex = 2;
             this.btnKey3.Text = "3";
             this.btnKey3.UseVisualStyleBackColor = true;
+            this.btnKey3.Click += new System.EventHandler(this.btnKey3_Click);
             // 
             // btnKeyComma
             // 
@@ -260,6 +271,7 @@
             this.btnKeyComma.TabIndex = 3;
             this.btnKeyComma.Text = ",";
             this.btnKeyComma.UseVisualStyleBackColor = true;
+            this.btnKeyComma.Click += new System.EventHandler(this.btnKeyComma_Click);
             // 
             // flowLayoutPanel7
             // 
@@ -287,6 +299,7 @@
             this.btnKeyDivide.TabIndex = 0;
             this.btnKeyDivide.Text = "/";
             this.btnKeyDivide.UseVisualStyleBackColor = true;
+            this.btnKeyDivide.Click += new System.EventHandler(this.btnKeyDivide_Click);
             // 
             // btnKeyMultiply
             // 
@@ -298,6 +311,7 @@
             this.btnKeyMultiply.TabIndex = 1;
             this.btnKeyMultiply.Text = "*";
             this.btnKeyMultiply.UseVisualStyleBackColor = true;
+            this.btnKeyMultiply.Click += new System.EventHandler(this.btnKeyMultiply_Click);
             // 
             // btnKeySubstract
             // 
@@ -309,6 +323,7 @@
             this.btnKeySubstract.TabIndex = 2;
             this.btnKeySubstract.Text = "-";
             this.btnKeySubstract.UseVisualStyleBackColor = true;
+            this.btnKeySubstract.Click += new System.EventHandler(this.btnKeySubstract_Click);
             // 
             // btnKeyAdd
             // 
@@ -320,6 +335,7 @@
             this.btnKeyAdd.TabIndex = 3;
             this.btnKeyAdd.Text = "+";
             this.btnKeyAdd.UseVisualStyleBackColor = true;
+            this.btnKeyAdd.Click += new System.EventHandler(this.btnKeyAdd_Click);
             // 
             // btnKeyEqual
             // 
@@ -331,6 +347,7 @@
             this.btnKeyEqual.TabIndex = 4;
             this.btnKeyEqual.Text = "=";
             this.btnKeyEqual.UseVisualStyleBackColor = true;
+            this.btnKeyEqual.Click += new System.EventHandler(this.btnKeyEqual_Click);
             // 
             // flowLayoutPanel2
             // 
