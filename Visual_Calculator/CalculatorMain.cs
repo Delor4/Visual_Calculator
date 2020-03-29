@@ -126,7 +126,7 @@ namespace Visual_Calculator
                 case OP.Multiply:
                     return firstOp * secondOp;
                 case OP.Divide:
-                    return firstOp / secondOp;
+                    return Math.Truncate(firstOp / secondOp);
             }
             return 0;
         }
