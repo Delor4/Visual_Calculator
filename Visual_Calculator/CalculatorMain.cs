@@ -83,6 +83,8 @@ namespace Visual_Calculator
                 { Keys.OemQuestion,             this.btnKeyDivide_Click },
 
                 { Keys.Escape, this.CloseKeyBinding},
+                
+                { Keys.F1, this.AboutBinding},
 
                 { Keys.NumPad1, this.btnKey1_Click },
                 { Keys.NumPad2, this.btnKey2_Click },
@@ -240,6 +242,11 @@ namespace Visual_Calculator
         private void CloseKeyBinding(object sender, EventArgs e)
         {
             Close();
+        }
+        private void AboutBinding(object sender, EventArgs e)
+        {
+            var aboutForm = new AboutForm();
+            aboutForm.ShowDialog();
         }
     }
 }
