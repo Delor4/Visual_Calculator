@@ -123,6 +123,12 @@ namespace Visual_Calculator
             return 0;
         }
 
+        private void errorHandler(String msg)
+        {
+                Result = 0;
+                History += " " + msg;
+                clearHistory = true;
+        }
         private void doOperation(op o)
         {
             if (clearHistory) History = "";
@@ -139,10 +145,13 @@ namespace Visual_Calculator
                 }
                 catch (DivideByZeroException)
                 {
-                    Result = 0;
+                    errorHandler("Div0!");
                     o = op.NONE;
-                    History += " Błąd!";
-                    clearHistory = true;
+                }
+                catch (OverflowException)
+                {
+                    errorHandler("Overflow!");
+                    o = op.NONE;
                 }
             }
             lastResult = Result;
