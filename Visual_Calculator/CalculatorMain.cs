@@ -246,6 +246,7 @@ namespace Visual_Calculator
         private void AboutBinding(object sender, EventArgs e)
         {
             var aboutForm = new AboutForm();
+            aboutForm.Icon = this.Icon;
             aboutForm.ShowDialog();
         }
     }

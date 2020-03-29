@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalculatorMainForm));
             this.btnKey7 = new System.Windows.Forms.Button();
             this.btnKey4 = new System.Windows.Forms.Button();
             this.btnKey1 = new System.Windows.Forms.Button();
@@ -246,7 +247,7 @@
             this.txtBoxResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtBoxResult.WordWrap = false;
             // 
-            // KalkulatorMain
+            // CalculatorMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -270,10 +271,11 @@
             this.Controls.Add(this.btnKey1);
             this.Controls.Add(this.btnKeyEqual);
             this.Controls.Add(this.btnKey0);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(334, 371);
-            this.Name = "KalkulatorMain";
+            this.Name = "CalculatorMainForm";
             this.Text = "Kalkulator całkowitoliczbowy";
             this.ResumeLayout(false);
             this.PerformLayout();
