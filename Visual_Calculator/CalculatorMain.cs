@@ -110,12 +110,19 @@ namespace Visual_Calculator
         }
         private void DoNumberKey(int nr)
         {
-            Result = clearResult ?
-                nr :
-                Result * 10 + (Math.Sign(Result) != 0 ?
-                    (Math.Sign(Result) * nr) :
-                    nr);
-            clearResult = false;
+            try
+            {
+                Result = clearResult ?
+                    nr :
+                    Result * 10 + (Math.Sign(Result) != 0 ?
+                        (Math.Sign(Result) * nr) :
+                        nr);
+                clearResult = false;
+            }
+            catch (OverflowException)
+            {
+                ErrorHandler("Overflow!");
+            }
         }
         private decimal ExecuteOp(OP oper, decimal firstOp, decimal secondOp)
         {
@@ -135,6 +142,7 @@ namespace Visual_Calculator
         private void ErrorHandler(String msg)
         {
             Result = 0;
+            lastResult = 0;
             History += " " + msg;
             clearHistory = true;
         }
@@ -169,7 +177,13 @@ namespace Visual_Calculator
         }
         private void DoChangeSign()
         {
-            Result = -Result;
+            try {
+                Result = -Result;
+            }
+            catch (OverflowException)
+            {
+                ErrorHandler("Overflow!");
+            }
         }
         private void btnKey1_Click(object sender, EventArgs e)
         {
