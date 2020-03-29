@@ -65,6 +65,7 @@ namespace Visual_Calculator
                 { Keys.D8, this.btnKey8_Click },
                 { Keys.D9, this.btnKey9_Click },
                 { Keys.D0, this.btnKey0_Click },
+
                 { Keys.Add, this.btnKeyAdd_Click },
                 { Keys.Divide, this.btnKeyDivide_Click },
                 { Keys.Subtract, this.btnKeySubstract_Click },
@@ -76,6 +77,7 @@ namespace Visual_Calculator
                 { Keys.Oemplus | Keys.Shift, this.btnKeyAdd_Click },
                 { Keys.Oemplus, this.btnKeyEqual_Click },
                 { Keys.OemQuestion, this.btnKeyDivide_Click },
+
                 { Keys.Escape, this.CloseKeyBinding},
 
                 { Keys.NumPad1, this.btnKey1_Click },
@@ -99,7 +101,6 @@ namespace Visual_Calculator
                 return true;
             }
             
-            if(keyData != (Keys.Shift | Keys.ShiftKey)) MessageBox.Show("Klawisz "+ keyData.ToString());
             return base.ProcessCmdKey(ref msg, keyData);
         }
         private void onNumberKey(int nr)
