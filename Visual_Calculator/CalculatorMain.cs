@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Input;
 
 namespace Visual_Calculator
 {
     public partial class KalkulatorMain : Form
     {
-        enum op { NONE, RESULT, MULTIPLY, DIVIDE, SUBSTRACT, ADD };
+        enum op { NONE, MULTIPLY, DIVIDE, SUBSTRACT, ADD, RESULT };
 
-        long lastResult = 0;
-        long result = 0;
+        decimal lastResult;
+        
+        decimal _result;
+        private decimal Result {
+            get { 
+                return _result; 
+            }
+            set { 
+                _result = value;
+                txtBoxResult.Text = _result.ToString();
+            }
+        }
+
         op lastOperation = op.NONE;
 
         Dictionary<op, char> opChars = new Dictionary<op, char> {
@@ -29,14 +33,22 @@ namespace Visual_Calculator
 
         Dictionary<Keys, Action<object, EventArgs>> keyBindings;
 
-        String history = "";
+        String _history = "";
+        private String History { 
+            get {
+                return _history;
+            }
+            set {
+                _history = value;
+                lblInfo.Text = _history;
+            } 
+        }
         bool clearResult = true;
         bool clearHistory = true;
 
         public KalkulatorMain()
         {
             InitializeComponent();
-            updateTexts();
             initBindings();
 
         }
@@ -64,6 +76,7 @@ namespace Visual_Calculator
                 { Keys.Oemplus | Keys.Shift, this.btnKeyAdd_Click },
                 { Keys.Oemplus, this.btnKeyEqual_Click },
                 { Keys.OemQuestion, this.btnKeyDivide_Click },
+                { Keys.Escape, this.CloseKeyBinding},
 
                 { Keys.NumPad1, this.btnKey1_Click },
                 { Keys.NumPad2, this.btnKey2_Click },
@@ -77,13 +90,7 @@ namespace Visual_Calculator
                 { Keys.NumPad0, this.btnKey0_Click },
             };
 
-        }
-        private void updateTexts()
-        {
-            txtBoxResult.Text = result.ToString();
-            lblInfo.Text = history;
-        }
-
+        }        
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyBindings.ContainsKey(keyData))
@@ -97,11 +104,10 @@ namespace Visual_Calculator
         }
         private void onNumberKey(int nr)
         {
-            result = clearResult ? nr : result * 10 + (Math.Sign(result) != 0 ? (Math.Sign(result) * nr) : nr);
+            Result = clearResult ? nr : Result * 10 + (Math.Sign(Result) != 0 ? (Math.Sign(Result) * nr) : nr);
             clearResult = false;
-            updateTexts();
         }
-        private long executeOp(op o, long firstOp, long secondOp)
+        private decimal executeOp(op o, decimal firstOp, decimal secondOp)
         {
             switch (o)
             {
@@ -119,9 +125,9 @@ namespace Visual_Calculator
 
         private void doOperation(op o)
         {
-            if (clearHistory) history = "";
+            if (clearHistory) History = "";
 
-            history += " " + result.ToString() + " " + opChars[o];
+            History += " " + Result.ToString() + " " + opChars[o];
 
             clearHistory = o == op.RESULT ? true : false;
 
@@ -129,25 +135,23 @@ namespace Visual_Calculator
             {
                 try
                 {
-                    result = lastOperation == op.RESULT ? result : executeOp(lastOperation, lastResult, result);
+                    Result = lastOperation == op.RESULT ? Result : executeOp(lastOperation, lastResult, Result);
                 }
-                catch (DivideByZeroException e)
+                catch (DivideByZeroException)
                 {
-                    result = 0;
+                    Result = 0;
                     o = op.NONE;
-                    history += " Błąd!";
+                    History += " Błąd!";
                     clearHistory = true;
                 }
             }
-            lastResult = result;
+            lastResult = Result;
             clearResult = true;
             lastOperation = o;
-            updateTexts();
         }
         private void doChangeSign()
         {
-            result = -result;
-            updateTexts();
+            Result = -Result;
         }
         private void btnKey1_Click(object sender, EventArgs e)
         {
@@ -233,5 +237,9 @@ namespace Visual_Calculator
             doOperation(op.RESULT);
         }
 
+        private void CloseKeyBinding(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
