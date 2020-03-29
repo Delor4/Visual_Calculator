@@ -4,55 +4,59 @@ using System.Windows.Forms;
 
 namespace Visual_Calculator
 {
-    public partial class KalkulatorMain : Form
+    public partial class CalculatorMainForm : Form
     {
-        enum op { NONE, MULTIPLY, DIVIDE, SUBSTRACT, ADD, RESULT };
+        enum OP { None, Multiply, Divide, Substract, Add, Eval };
 
-        decimal lastResult;
-        
+        OP lastOperation = OP.None;
+
+        Dictionary<OP, char> opChars = new Dictionary<OP, char> {
+            { OP.Add,       '+' },
+            { OP.Substract, '-' },
+            { OP.Multiply,  '*' },
+            { OP.Divide,    '/' },
+            { OP.Eval,      '=' },
+        };
+
+        Dictionary<Keys, Action<object, EventArgs>> keyBindings;
+
         decimal _result;
-        private decimal Result {
-            get { 
-                return _result; 
-            }
-            set { 
+        private decimal Result
+        {
+            get => _result;
+
+            set
+            {
                 _result = value;
                 txtBoxResult.Text = _result.ToString();
             }
         }
 
-        op lastOperation = op.NONE;
+        decimal lastResult;
 
-        Dictionary<op, char> opChars = new Dictionary<op, char> {
-            { op.ADD,'+' },
-            { op.SUBSTRACT,'-' },
-            { op.MULTIPLY,'*' },
-            { op.DIVIDE,'/' },
-            { op.RESULT,'=' },
-        };
-
-        Dictionary<Keys, Action<object, EventArgs>> keyBindings;
+        bool clearResult = true;
 
         String _history = "";
-        private String History { 
-            get {
-                return _history;
-            }
-            set {
+        private String History
+        {
+            get => _history;
+
+            set
+            {
                 _history = value;
                 lblInfo.Text = _history;
-            } 
+            }
         }
-        bool clearResult = true;
+
         bool clearHistory = true;
 
-        public KalkulatorMain()
+        public CalculatorMainForm()
         {
             InitializeComponent();
-            initBindings();
+            InitBindings();
 
         }
-        private void initBindings()
+        private void InitBindings()
         {
             keyBindings = new Dictionary<Keys, Action<object, EventArgs>>{
                 { Keys.D1, this.btnKey1_Click },
@@ -66,17 +70,17 @@ namespace Visual_Calculator
                 { Keys.D9, this.btnKey9_Click },
                 { Keys.D0, this.btnKey0_Click },
 
-                { Keys.Add, this.btnKeyAdd_Click },
-                { Keys.Divide, this.btnKeyDivide_Click },
-                { Keys.Subtract, this.btnKeySubstract_Click },
-                { Keys.Multiply, this.btnKeyMultiply_Click },
-                { Keys.D8 | Keys.Shift, this.btnKeyMultiply_Click },
-                { Keys.Execute, this.btnKeyEqual_Click },
-                { Keys.Return, this.btnKeyEqual_Click },
-                { Keys.OemMinus, this.btnKeySubstract_Click },
-                { Keys.Oemplus | Keys.Shift, this.btnKeyAdd_Click },
-                { Keys.Oemplus, this.btnKeyEqual_Click },
-                { Keys.OemQuestion, this.btnKeyDivide_Click },
+                { Keys.Add,                     this.btnKeyAdd_Click },
+                { Keys.Divide,                  this.btnKeyDivide_Click },
+                { Keys.Subtract,                this.btnKeySubstract_Click },
+                { Keys.Multiply,                this.btnKeyMultiply_Click },
+                { Keys.D8 | Keys.Shift,         this.btnKeyMultiply_Click },
+                { Keys.Execute,                 this.btnKeyEqual_Click },
+                { Keys.Return,                  this.btnKeyEqual_Click },
+                { Keys.OemMinus,                this.btnKeySubstract_Click },
+                { Keys.Oemplus | Keys.Shift,    this.btnKeyAdd_Click },
+                { Keys.Oemplus,                 this.btnKeyEqual_Click },
+                { Keys.OemQuestion,             this.btnKeyDivide_Click },
 
                 { Keys.Escape, this.CloseKeyBinding},
 
@@ -91,8 +95,7 @@ namespace Visual_Calculator
                 { Keys.NumPad9, this.btnKey9_Click },
                 { Keys.NumPad0, this.btnKey0_Click },
             };
-
-        }        
+        }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyBindings.ContainsKey(keyData))
@@ -100,156 +103,143 @@ namespace Visual_Calculator
                 keyBindings[keyData](null, null);
                 return true;
             }
-            
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
-        private void onNumberKey(int nr)
+        private void DoNumberKey(int nr)
         {
-            Result = clearResult ? nr : Result * 10 + (Math.Sign(Result) != 0 ? (Math.Sign(Result) * nr) : nr);
+            Result = clearResult ?
+                nr :
+                Result * 10 + (Math.Sign(Result) != 0 ?
+                    (Math.Sign(Result) * nr) :
+                    nr);
             clearResult = false;
         }
-        private decimal executeOp(op o, decimal firstOp, decimal secondOp)
+        private decimal ExecuteOp(OP oper, decimal firstOp, decimal secondOp)
         {
-            switch (o)
+            switch (oper)
             {
-                case op.ADD:
+                case OP.Add:
                     return firstOp + secondOp;
-                case op.SUBSTRACT:
+                case OP.Substract:
                     return firstOp - secondOp;
-                case op.MULTIPLY:
+                case OP.Multiply:
                     return firstOp * secondOp;
-                case op.DIVIDE:
+                case OP.Divide:
                     return firstOp / secondOp;
             }
             return 0;
         }
-
-        private void errorHandler(String msg)
+        private void ErrorHandler(String msg)
         {
-                Result = 0;
-                History += " " + msg;
-                clearHistory = true;
+            Result = 0;
+            History += " " + msg;
+            clearHistory = true;
         }
-        private void doOperation(op o)
+        private void DoOperation(OP oper)
         {
             if (clearHistory) History = "";
 
-            History += " " + Result.ToString() + " " + opChars[o];
+            History += " " + Result.ToString() + " " + opChars[oper];
 
-            clearHistory = o == op.RESULT ? true : false;
+            clearHistory = oper == OP.Eval ? true : false;
 
-            if (lastOperation != op.NONE)
+            if (lastOperation != OP.None)
             {
                 try
                 {
-                    Result = lastOperation == op.RESULT ? Result : executeOp(lastOperation, lastResult, Result);
+                    Result = lastOperation == OP.Eval ? Result : ExecuteOp(lastOperation, lastResult, Result);
                 }
                 catch (DivideByZeroException)
                 {
-                    errorHandler("Div0!");
-                    o = op.NONE;
+                    ErrorHandler("Div0!");
+                    oper = OP.None;
                 }
                 catch (OverflowException)
                 {
-                    errorHandler("Overflow!");
-                    o = op.NONE;
+                    ErrorHandler("Overflow!");
+                    oper = OP.None;
                 }
             }
             lastResult = Result;
             clearResult = true;
-            lastOperation = o;
+            lastOperation = oper;
         }
-        private void doChangeSign()
+        private void DoChangeSign()
         {
             Result = -Result;
         }
         private void btnKey1_Click(object sender, EventArgs e)
         {
-            onNumberKey(1);
+            DoNumberKey(1);
         }
-
         private void btnKey2_Click(object sender, EventArgs e)
         {
-            onNumberKey(2);
+            DoNumberKey(2);
         }
-
         private void btnKey3_Click(object sender, EventArgs e)
         {
-            onNumberKey(3);
+            DoNumberKey(3);
         }
-
         private void btnKey4_Click(object sender, EventArgs e)
         {
-            onNumberKey(4);
+            DoNumberKey(4);
         }
-
         private void btnKey5_Click(object sender, EventArgs e)
         {
-            onNumberKey(5);
+            DoNumberKey(5);
         }
-
         private void btnKey6_Click(object sender, EventArgs e)
         {
-            onNumberKey(6);
+            DoNumberKey(6);
         }
-
         private void btnKey7_Click(object sender, EventArgs e)
         {
-            onNumberKey(7);
+            DoNumberKey(7);
         }
         private void btnKey8_Click(object sender, EventArgs e)
         {
-            onNumberKey(8);
+            DoNumberKey(8);
         }
-
         private void btnKey9_Click(object sender, EventArgs e)
         {
-            onNumberKey(9);
+            DoNumberKey(9);
         }
-
         private void btnKey0_Click(object sender, EventArgs e)
         {
-            onNumberKey(0);
+            DoNumberKey(0);
         }
-
         private void btnKeyComma_Click(object sender, EventArgs e)
         {
-
+            // Do nothing. Not implemented.
         }
-
         private void btnKeySign_Click(object sender, EventArgs e)
         {
-            doChangeSign();
+            DoChangeSign();
         }
-
         private void btnKeyDivide_Click(object sender, EventArgs e)
         {
-            doOperation(op.DIVIDE);
+            DoOperation(OP.Divide);
         }
-
         private void btnKeyMultiply_Click(object sender, EventArgs e)
         {
-            doOperation(op.MULTIPLY);
+            DoOperation(OP.Multiply);
         }
-
         private void btnKeySubstract_Click(object sender, EventArgs e)
         {
-            doOperation(op.SUBSTRACT);
+            DoOperation(OP.Substract);
         }
-
         private void btnKeyAdd_Click(object sender, EventArgs e)
         {
-            doOperation(op.ADD);
+            DoOperation(OP.Add);
         }
-
         private void btnKeyEqual_Click(object sender, EventArgs e)
         {
-            doOperation(op.RESULT);
+            DoOperation(OP.Eval);
         }
-
         private void CloseKeyBinding(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

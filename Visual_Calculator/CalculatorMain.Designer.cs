@@ -1,6 +1,6 @@
 ﻿namespace Visual_Calculator
 {
-    partial class KalkulatorMain
+    partial class CalculatorMainForm
     {
         /// <summary>
         /// Wymagana zmienna projektanta.
