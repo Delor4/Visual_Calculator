@@ -224,11 +224,12 @@
             // 
             this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInfo.AutoEllipsis = true;
             this.lblInfo.Location = new System.Drawing.Point(12, 9);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(294, 13);
             this.lblInfo.TabIndex = 2;
-            this.lblInfo.Text = "-";
+            this.lblInfo.Text = "Witaj!";
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtBoxResult
@@ -271,6 +272,7 @@
             this.Controls.Add(this.btnKey0);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(334, 371);
             this.Name = "KalkulatorMain";
             this.Text = "Kalkulator całkowitoliczbowy";
             this.ResumeLayout(false);
