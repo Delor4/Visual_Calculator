@@ -28,18 +28,18 @@ namespace Visual_Calculator
             set
             {
                 _result = value;
-                txtBoxResult.Text = Denomine(_result).ToString();
+                UpdateTextBox();
             }
         }
         private byte _denominator;
-        private byte denominator
+        private byte Denominator
         {
             get => _denominator;
 
             set
             {
                 _denominator = value;
-                txtBoxResult.Text = Denomine(_result).ToString();
+                UpdateTextBox();
             }
         }
 
@@ -120,22 +120,28 @@ namespace Visual_Calculator
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-        private void DoNumberKey(int nr)
+
+        private void UpdateTextBox()
         {
-            try
-            {
-                Result = clearResult ?
-                    nr :
-                    Result * 10 + (Result < 0 ?
-                        -nr :
-                        nr);
-                if (denominator > 0) denominator++;
-                clearResult = false;
-            }
-            catch (OverflowException)
-            {
-                ErrorHandler("Overflow!");
-            }
+            txtBoxResult.Text = Denomine(Result).ToString();
+        }
+        private void ErrorHandler(String msg)
+        {
+            Result = 0;
+            Denominator = 0;
+            lastResult = 0;
+            History += " " + msg;
+            clearHistory = true;
+        }
+        public decimal Normalize(decimal value)
+        {
+            return value / 1.000000000000000000000000000000000m;
+        }
+        private decimal Denomine(decimal nr)
+        {
+            return Denominator == 0 ?
+                nr :
+                nr * (decimal)Math.Pow(10, 1 - Denominator);
         }
         private decimal ExecuteOp(OP oper, decimal firstOp, decimal secondOp)
         {
@@ -152,23 +158,22 @@ namespace Visual_Calculator
             }
             return 0;
         }
-        private void ErrorHandler(String msg)
+        private void DoNumberKey(int nr)
         {
-            Result = 0;
-            denominator = 0;
-            lastResult = 0;
-            History += " " + msg;
-            clearHistory = true;
-        }
-        public decimal Normalize(decimal value)
-        {
-            return value / 1.000000000000000000000000000000000m;
-        }
-        private decimal Denomine(decimal nr)
-        {
-            return denominator == 0 ?
-                nr :
-                nr * (decimal)Math.Pow(10, 1 - denominator);
+            try
+            {
+                Result = clearResult ?
+                    nr :
+                    Result * 10 + (Result < 0 ?
+                        -nr :
+                        nr);
+                if (Denominator > 0) Denominator++;
+                clearResult = false;
+            }
+            catch (OverflowException)
+            {
+                ErrorHandler("Overflow!");
+            }
         }
         private void DoOperation(OP oper)
         {
@@ -183,7 +188,7 @@ namespace Visual_Calculator
                 try
                 {
                     Result = Normalize(lastOperation == OP.Eval ? Denomine(Result) : ExecuteOp(lastOperation, lastResult, Denomine(Result)));
-                    denominator = 0;
+                    Denominator = 0;
                 }
                 catch (DivideByZeroException)
                 {
@@ -197,7 +202,7 @@ namespace Visual_Calculator
                 }
             }
             Result = Denomine(Result);
-            denominator = 0;
+            Denominator = 0;
             lastResult = Result;
             clearResult = true;
             lastOperation = oper;
@@ -214,7 +219,7 @@ namespace Visual_Calculator
         }
         private void DoComa()
         {
-            if (denominator == 0) denominator = 1;
+            if (Denominator == 0) Denominator = 1;
             if (clearResult) Result = 0;
         }
         private void btnKey1_Click(object sender, EventArgs e)
