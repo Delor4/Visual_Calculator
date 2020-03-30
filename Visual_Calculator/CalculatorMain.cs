@@ -94,6 +94,7 @@ namespace Visual_Calculator
                 { Keys.Oemplus,                 this.btnKeyEqual_Click },
                 { Keys.OemQuestion,             this.btnKeyDivide_Click },
 
+                { Keys.Decimal,                 this.btnKeyComma_Click },
                 { Keys.Oemcomma,                this.btnKeyComma_Click },
                 { Keys.OemPeriod,               this.btnKeyComma_Click },
 
