@@ -97,6 +97,9 @@ namespace Visual_Calculator
                 { Keys.Oemcomma,                this.btnKeyComma_Click },
                 { Keys.OemPeriod,               this.btnKeyComma_Click },
 
+                { Keys.Back,                    this.btnKeyBack_Click },
+                { Keys.Delete,                  this.btnKeyBack_Click },
+
                 { Keys.Escape, this.CloseKeyBinding},
                 
                 { Keys.F1, this.AboutBinding},
@@ -225,6 +228,13 @@ namespace Visual_Calculator
             if (Denominator == 0) Denominator = 1;
             if (clearResult) Result = 0;
         }
+        private void DoBack()
+        {
+            Result = clearResult ?
+                0 :
+                Math.Truncate(Result / 10);
+            if (Denominator > 0) Denominator--;
+        }
         private void btnKey1_Click(object sender, EventArgs e)
         {
             DoNumberKey(1);
@@ -302,6 +312,11 @@ namespace Visual_Calculator
             var aboutForm = new AboutForm();
             aboutForm.Icon = this.Icon;
             aboutForm.ShowDialog();
+        }
+
+        private void btnKeyBack_Click(object sender, EventArgs e)
+        {
+            DoBack();
         }
     }
 }

@@ -48,11 +48,12 @@
             this.btnKeyEqual = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
             this.txtBoxResult = new System.Windows.Forms.TextBox();
+            this.btnKeyBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnKey7
             // 
-            this.btnKey7.Location = new System.Drawing.Point(12, 78);
+            this.btnKey7.Location = new System.Drawing.Point(14, 106);
             this.btnKey7.Name = "btnKey7";
             this.btnKey7.Size = new System.Drawing.Size(50, 50);
             this.btnKey7.TabIndex = 0;
@@ -62,7 +63,7 @@
             // 
             // btnKey4
             // 
-            this.btnKey4.Location = new System.Drawing.Point(12, 145);
+            this.btnKey4.Location = new System.Drawing.Point(14, 173);
             this.btnKey4.Name = "btnKey4";
             this.btnKey4.Size = new System.Drawing.Size(50, 50);
             this.btnKey4.TabIndex = 1;
@@ -72,7 +73,7 @@
             // 
             // btnKey1
             // 
-            this.btnKey1.Location = new System.Drawing.Point(12, 212);
+            this.btnKey1.Location = new System.Drawing.Point(14, 240);
             this.btnKey1.Name = "btnKey1";
             this.btnKey1.Size = new System.Drawing.Size(50, 50);
             this.btnKey1.TabIndex = 2;
@@ -82,7 +83,7 @@
             // 
             // btnKeySign
             // 
-            this.btnKeySign.Location = new System.Drawing.Point(12, 279);
+            this.btnKeySign.Location = new System.Drawing.Point(14, 307);
             this.btnKeySign.Name = "btnKeySign";
             this.btnKeySign.Size = new System.Drawing.Size(40, 40);
             this.btnKeySign.TabIndex = 3;
@@ -92,7 +93,7 @@
             // 
             // btnKey8
             // 
-            this.btnKey8.Location = new System.Drawing.Point(96, 78);
+            this.btnKey8.Location = new System.Drawing.Point(98, 106);
             this.btnKey8.Name = "btnKey8";
             this.btnKey8.Size = new System.Drawing.Size(50, 50);
             this.btnKey8.TabIndex = 0;
@@ -102,7 +103,7 @@
             // 
             // btnKey5
             // 
-            this.btnKey5.Location = new System.Drawing.Point(96, 146);
+            this.btnKey5.Location = new System.Drawing.Point(98, 174);
             this.btnKey5.Name = "btnKey5";
             this.btnKey5.Size = new System.Drawing.Size(50, 50);
             this.btnKey5.TabIndex = 1;
@@ -112,7 +113,7 @@
             // 
             // btnKey2
             // 
-            this.btnKey2.Location = new System.Drawing.Point(96, 212);
+            this.btnKey2.Location = new System.Drawing.Point(98, 240);
             this.btnKey2.Name = "btnKey2";
             this.btnKey2.Size = new System.Drawing.Size(50, 50);
             this.btnKey2.TabIndex = 2;
@@ -122,7 +123,7 @@
             // 
             // btnKey0
             // 
-            this.btnKey0.Location = new System.Drawing.Point(96, 279);
+            this.btnKey0.Location = new System.Drawing.Point(98, 307);
             this.btnKey0.Name = "btnKey0";
             this.btnKey0.Size = new System.Drawing.Size(40, 40);
             this.btnKey0.TabIndex = 3;
@@ -132,7 +133,7 @@
             // 
             // btnKey9
             // 
-            this.btnKey9.Location = new System.Drawing.Point(180, 78);
+            this.btnKey9.Location = new System.Drawing.Point(182, 106);
             this.btnKey9.Name = "btnKey9";
             this.btnKey9.Size = new System.Drawing.Size(50, 50);
             this.btnKey9.TabIndex = 0;
@@ -142,7 +143,7 @@
             // 
             // btnKey6
             // 
-            this.btnKey6.Location = new System.Drawing.Point(180, 146);
+            this.btnKey6.Location = new System.Drawing.Point(182, 174);
             this.btnKey6.Name = "btnKey6";
             this.btnKey6.Size = new System.Drawing.Size(50, 50);
             this.btnKey6.TabIndex = 1;
@@ -152,7 +153,7 @@
             // 
             // btnKey3
             // 
-            this.btnKey3.Location = new System.Drawing.Point(180, 212);
+            this.btnKey3.Location = new System.Drawing.Point(182, 240);
             this.btnKey3.Name = "btnKey3";
             this.btnKey3.Size = new System.Drawing.Size(50, 50);
             this.btnKey3.TabIndex = 2;
@@ -162,7 +163,7 @@
             // 
             // btnKeyComma
             // 
-            this.btnKeyComma.Location = new System.Drawing.Point(180, 279);
+            this.btnKeyComma.Location = new System.Drawing.Point(182, 307);
             this.btnKeyComma.Name = "btnKeyComma";
             this.btnKeyComma.Size = new System.Drawing.Size(40, 40);
             this.btnKeyComma.TabIndex = 3;
@@ -172,7 +173,7 @@
             // 
             // btnKeyDivide
             // 
-            this.btnKeyDivide.Location = new System.Drawing.Point(264, 79);
+            this.btnKeyDivide.Location = new System.Drawing.Point(266, 107);
             this.btnKeyDivide.Name = "btnKeyDivide";
             this.btnKeyDivide.Size = new System.Drawing.Size(40, 40);
             this.btnKeyDivide.TabIndex = 0;
@@ -182,7 +183,7 @@
             // 
             // btnKeyMultiply
             // 
-            this.btnKeyMultiply.Location = new System.Drawing.Point(264, 129);
+            this.btnKeyMultiply.Location = new System.Drawing.Point(266, 157);
             this.btnKeyMultiply.Name = "btnKeyMultiply";
             this.btnKeyMultiply.Size = new System.Drawing.Size(40, 40);
             this.btnKeyMultiply.TabIndex = 1;
@@ -192,7 +193,7 @@
             // 
             // btnKeySubstract
             // 
-            this.btnKeySubstract.Location = new System.Drawing.Point(264, 179);
+            this.btnKeySubstract.Location = new System.Drawing.Point(266, 207);
             this.btnKeySubstract.Name = "btnKeySubstract";
             this.btnKeySubstract.Size = new System.Drawing.Size(40, 40);
             this.btnKeySubstract.TabIndex = 2;
@@ -202,7 +203,7 @@
             // 
             // btnKeyAdd
             // 
-            this.btnKeyAdd.Location = new System.Drawing.Point(264, 229);
+            this.btnKeyAdd.Location = new System.Drawing.Point(266, 257);
             this.btnKeyAdd.Name = "btnKeyAdd";
             this.btnKeyAdd.Size = new System.Drawing.Size(40, 40);
             this.btnKeyAdd.TabIndex = 3;
@@ -212,7 +213,7 @@
             // 
             // btnKeyEqual
             // 
-            this.btnKeyEqual.Location = new System.Drawing.Point(264, 279);
+            this.btnKeyEqual.Location = new System.Drawing.Point(266, 307);
             this.btnKeyEqual.Name = "btnKeyEqual";
             this.btnKeyEqual.Size = new System.Drawing.Size(40, 40);
             this.btnKeyEqual.TabIndex = 4;
@@ -246,11 +247,22 @@
             this.txtBoxResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtBoxResult.WordWrap = false;
             // 
+            // btnKeyBack
+            // 
+            this.btnKeyBack.Location = new System.Drawing.Point(266, 75);
+            this.btnKeyBack.Name = "btnKeyBack";
+            this.btnKeyBack.Size = new System.Drawing.Size(40, 23);
+            this.btnKeyBack.TabIndex = 5;
+            this.btnKeyBack.Text = "<-";
+            this.btnKeyBack.UseVisualStyleBackColor = true;
+            this.btnKeyBack.Click += new System.EventHandler(this.btnKeyBack_Click);
+            // 
             // CalculatorMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 332);
+            this.ClientSize = new System.Drawing.Size(318, 359);
+            this.Controls.Add(this.btnKeyBack);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnKeyDivide);
             this.Controls.Add(this.txtBoxResult);
@@ -301,6 +313,7 @@
         private System.Windows.Forms.Button btnKeyEqual;
         private System.Windows.Forms.TextBox txtBoxResult;
         private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button btnKeyBack;
     }
 }
 
