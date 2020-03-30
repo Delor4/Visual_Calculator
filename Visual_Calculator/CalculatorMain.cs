@@ -101,7 +101,7 @@ namespace Visual_Calculator
                 { Keys.Delete,                  this.btnKeyBack_Click },
 
                 { Keys.Escape, this.CloseKeyBinding},
-                
+
                 { Keys.F1, this.AboutBinding},
 
                 { Keys.NumPad1, this.btnKey1_Click },
@@ -193,7 +193,9 @@ namespace Visual_Calculator
             {
                 try
                 {
-                    Result = Normalize(lastOperation == OP.Eval ? Denomine(Result) : ExecuteOp(lastOperation, lastResult, Denomine(Result)));
+                    Result = Normalize(lastOperation == OP.Eval ?
+                            Denomine(Result) :
+                            ExecuteOp(lastOperation, lastResult, Denomine(Result)));
                     Denominator = 0;
                 }
                 catch (DivideByZeroException)
@@ -215,7 +217,8 @@ namespace Visual_Calculator
         }
         private void DoChangeSign()
         {
-            try {
+            try
+            {
                 Result = -Result;
             }
             catch (OverflowException)
