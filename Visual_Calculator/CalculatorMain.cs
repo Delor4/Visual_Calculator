@@ -28,7 +28,18 @@ namespace Visual_Calculator
             set
             {
                 _result = value;
-                txtBoxResult.Text = _result.ToString();
+                txtBoxResult.Text = Denomine(_result).ToString();
+            }
+        }
+        private byte _denominator;
+        private byte denominator
+        {
+            get => _denominator;
+
+            set
+            {
+                _denominator = value;
+                txtBoxResult.Text = Denomine(_result).ToString();
             }
         }
 
@@ -54,6 +65,7 @@ namespace Visual_Calculator
         {
             InitializeComponent();
             InitBindings();
+            Result = 0;
 
         }
         private void InitBindings()
@@ -114,9 +126,10 @@ namespace Visual_Calculator
             {
                 Result = clearResult ?
                     nr :
-                    Result * 10 + (Math.Sign(Result) != 0 ?
-                        (Math.Sign(Result) * nr) :
+                    Result * 10 + (Result < 0 ?
+                        -nr :
                         nr);
+                if (denominator > 0) denominator++;
                 clearResult = false;
             }
             catch (OverflowException)
@@ -135,22 +148,33 @@ namespace Visual_Calculator
                 case OP.Multiply:
                     return firstOp * secondOp;
                 case OP.Divide:
-                    return Math.Truncate(firstOp / secondOp);
+                    return firstOp / secondOp;
             }
             return 0;
         }
         private void ErrorHandler(String msg)
         {
             Result = 0;
+            denominator = 0;
             lastResult = 0;
             History += " " + msg;
             clearHistory = true;
+        }
+        public decimal Normalize(decimal value)
+        {
+            return value / 1.000000000000000000000000000000000m;
+        }
+        private decimal Denomine(decimal nr)
+        {
+            return denominator == 0 ?
+                nr :
+                nr * (decimal)Math.Pow(10, 1 - denominator);
         }
         private void DoOperation(OP oper)
         {
             if (clearHistory) History = "";
 
-            History += " " + Result.ToString() + " " + opChars[oper];
+            History += " " + Denomine(Result).ToString() + " " + opChars[oper];
 
             clearHistory = oper == OP.Eval ? true : false;
 
@@ -158,7 +182,8 @@ namespace Visual_Calculator
             {
                 try
                 {
-                    Result = lastOperation == OP.Eval ? Result : ExecuteOp(lastOperation, lastResult, Result);
+                    Result = Normalize(lastOperation == OP.Eval ? Denomine(Result) : ExecuteOp(lastOperation, lastResult, Denomine(Result)));
+                    denominator = 0;
                 }
                 catch (DivideByZeroException)
                 {
@@ -171,6 +196,8 @@ namespace Visual_Calculator
                     oper = OP.None;
                 }
             }
+            Result = Denomine(Result);
+            denominator = 0;
             lastResult = Result;
             clearResult = true;
             lastOperation = oper;
@@ -184,6 +211,11 @@ namespace Visual_Calculator
             {
                 ErrorHandler("Overflow!");
             }
+        }
+        private void DoComa()
+        {
+            if (denominator == 0) denominator = 1;
+            if (clearResult) Result = 0;
         }
         private void btnKey1_Click(object sender, EventArgs e)
         {
@@ -227,7 +259,7 @@ namespace Visual_Calculator
         }
         private void btnKeyComma_Click(object sender, EventArgs e)
         {
-            // Do nothing. Not implemented.
+            DoComa();
         }
         private void btnKeySign_Click(object sender, EventArgs e)
         {

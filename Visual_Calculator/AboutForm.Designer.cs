@@ -43,9 +43,9 @@
             this.label1.Location = new System.Drawing.Point(30, 15);
             this.label1.Margin = new System.Windows.Forms.Padding(30, 15, 3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 13);
+            this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Kalkulator Całkowitoliczbowy";
+            this.label1.Text = "Kalkulator";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowLayoutPanel1
@@ -70,9 +70,9 @@
             this.label2.Location = new System.Drawing.Point(30, 43);
             this.label2.Margin = new System.Windows.Forms.Padding(30, 15, 3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(145, 13);
+            this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Wersja 1.0";
+            this.label2.Text = "Wersja 1.1";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
@@ -82,7 +82,7 @@
             this.label3.Location = new System.Drawing.Point(30, 71);
             this.label3.Margin = new System.Windows.Forms.Padding(30, 15, 3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(145, 13);
+            this.label3.Size = new System.Drawing.Size(113, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Sebastian Kucharczyk";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -94,7 +94,7 @@
             this.label4.Location = new System.Drawing.Point(30, 99);
             this.label4.Margin = new System.Windows.Forms.Padding(30, 15, 3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(145, 13);
+            this.label4.Size = new System.Drawing.Size(113, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "03.2020";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

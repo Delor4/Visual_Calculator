@@ -168,7 +168,6 @@
             this.btnKeyComma.TabIndex = 3;
             this.btnKeyComma.Text = ",";
             this.btnKeyComma.UseVisualStyleBackColor = true;
-            this.btnKeyComma.Visible = false;
             this.btnKeyComma.Click += new System.EventHandler(this.btnKeyComma_Click);
             // 
             // btnKeyDivide
@@ -276,7 +275,7 @@
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(334, 371);
             this.Name = "CalculatorMainForm";
-            this.Text = "Kalkulator całkowitoliczbowy";
+            this.Text = "Kalkulator";
             this.ResumeLayout(false);
             this.PerformLayout();
 
