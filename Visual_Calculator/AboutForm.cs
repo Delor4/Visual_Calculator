@@ -15,6 +15,7 @@ namespace Visual_Calculator
         public AboutForm()
         {
             InitializeComponent();
+            label2.Text = "Wersja " + Properties.Resources.app_version;
         }
     }
 }

@@ -9,8 +9,7 @@ namespace Visual_Calculator
         enum OP { None, Multiply, Divide, Substract, Add, Eval };
 
         OP lastOperation = OP.None;
-
-        Dictionary<OP, char> opChars = new Dictionary<OP, char> {
+        readonly Dictionary<OP, char> opChars = new Dictionary<OP, char> {
             { OP.Add,       '+' },
             { OP.Substract, '-' },
             { OP.Multiply,  '*' },
@@ -313,8 +312,10 @@ namespace Visual_Calculator
         }
         private void AboutBinding(object sender, EventArgs e)
         {
-            var aboutForm = new AboutForm();
-            aboutForm.Icon = this.Icon;
+            var aboutForm = new AboutForm
+            {
+                Icon = this.Icon
+            };
             aboutForm.ShowDialog();
         }
 
