@@ -15,7 +15,13 @@ namespace Visual_Calculator
         public AboutForm()
         {
             InitializeComponent();
-            label2.Text = "Wersja " + Properties.Resources.app_version;
+            label2.Text = "Wersja " + Properties.Resources.app_version.Substring(
+                0,
+                Properties.Resources.app_version.LastIndexOf('-')
+                );
+#if DEBUG
+            label2.Text += " DEBUG";
+#endif
         }
     }
 }
