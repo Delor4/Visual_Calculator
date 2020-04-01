@@ -129,7 +129,7 @@ namespace Visual_Calculator
 
         private void UpdateTextBox()
         {
-            txtBoxResult.Text = Denomine(Result).ToString();
+            txtBoxResult.Text = Denomine(Result, Denominator).ToString();
         }
         private void ErrorHandler(String msg)
         {
@@ -139,15 +139,15 @@ namespace Visual_Calculator
             History += " " + msg;
             clearHistory = true;
         }
-        public decimal Normalize(decimal value)
+        public static decimal Normalize(decimal value)
         {
             return value / 1.000000000000000000000000000000000m;
         }
-        private decimal Denomine(decimal nr)
+        public static decimal Denomine(decimal nr, byte denominator)
         {
-            return Denominator == 0 ?
+            return denominator == 0 ?
                 nr :
-                nr * (decimal)Math.Pow(10, 1 - Denominator);
+                nr * (decimal)Math.Pow(10, 1 - denominator);
         }
         private decimal ExecuteOp(OP oper, decimal firstOp, decimal secondOp)
         {
@@ -185,7 +185,7 @@ namespace Visual_Calculator
         {
             if (clearHistory) History = "";
 
-            History += " " + Denomine(Result).ToString() + " " + opChars[oper];
+            History += " " + Denomine(Result, Denominator).ToString() + " " + opChars[oper];
 
             clearHistory = oper == OP.Eval ? true : false;
 
@@ -194,8 +194,8 @@ namespace Visual_Calculator
                 try
                 {
                     Result = Normalize(lastOperation == OP.Eval ?
-                            Denomine(Result) :
-                            ExecuteOp(lastOperation, lastResult, Denomine(Result)));
+                            Denomine(Result, Denominator) :
+                            ExecuteOp(lastOperation, lastResult, Denomine(Result, Denominator)));
                     Denominator = 0;
                 }
                 catch (DivideByZeroException)
@@ -209,7 +209,7 @@ namespace Visual_Calculator
                     oper = OP.None;
                 }
             }
-            Result = Denomine(Result);
+            Result = Denomine(Result, Denominator);
             Denominator = 0;
             lastResult = Result;
             clearResult = true;
